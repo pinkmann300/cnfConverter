@@ -36,7 +36,7 @@ nnfConvert xs = nnf (desugar xs)
 cnf :: Formula -> Formula 
 cnf (Var x) = Var x
 cnf (And x y) = And (cnf x) (cnf y)
-cnf (Or x (And k y)) = And (Or x k) (Or x y)
+cnf (Or x (And k y)) = And (Or (cnf x) (cnf k)) (Or (cnf x) (cnf y))
 cnf (Not (Not x)) = cnf x
 cnf (Not x) = Not (cnf x)
 cnf (Or x (Or k y)) = Or (cnf x) (Or (cnf k) (cnf y))
